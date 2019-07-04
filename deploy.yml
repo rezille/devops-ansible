@@ -1,0 +1,14 @@
+---
+# deploy webapp
+
+- hosts: webapp
+  gather_facts: false
+  tasks:
+    - name: Copy source code files to app server
+      copy:
+        src: "{{ item }}"
+        dest: "/app"
+        owner: "root"
+        mode: 0700
+      with_fileglob:
+        - "{{ workdir }}/*.py"
